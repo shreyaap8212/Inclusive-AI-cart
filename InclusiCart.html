@@ -1,0 +1,118 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>InclusiCart</title>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f6f7fb;--card:#fff;--fg:#14163a;--mut:#555a80;--pri:#3b3bd6;--on:#fff;--tea:#0a7f7c;--bd:#d9dcef;--ok:#0b7a4b;--bad:#b42318;--warn:#8a5a00;--s:1;--t:44px;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#0d0f24;--card:#171a3a;--fg:#eef0ff;--mut:#aaaed8;--pri:#9094ff;--on:#0d0f24;--tea:#3dd6d0;--bd:#2c3068;--ok:#4ade80;--bad:#ff8a80;--warn:#ffc857}}
+:root[data-theme=dark]{--bg:#0d0f24;--card:#171a3a;--fg:#eef0ff;--mut:#aaaed8;--pri:#9094ff;--on:#0d0f24;--tea:#3dd6d0;--bd:#2c3068;--ok:#4ade80;--bad:#ff8a80;--warn:#ffc857}
+:root[data-hc=true]{--bg:#000;--card:#000;--fg:#fff;--mut:#fff;--pri:#ffe600;--on:#000;--tea:#00ffd5;--bd:#fff;--ok:#7dff9b;--bad:#ff9a9a;--warn:#ffe600}
+html{font-size:calc(16px*var(--s))}*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:"Atkinson Hyperlegible",system-ui,sans-serif;line-height:1.5}
+button,input,select,textarea{font:inherit;color:inherit}
+button,.btn,select,input:not([type=checkbox]){min-height:var(--t);border-radius:12px}
+:focus-visible{outline:3px solid var(--pri);outline-offset:3px}
+.skip{position:absolute;left:-999px}.skip:focus{left:8px;top:8px;background:var(--pri);color:var(--on);padding:8px 14px;border-radius:8px;z-index:9}
+header{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:space-between;padding:12px 20px;border-bottom:1px solid var(--bd);background:var(--card);position:sticky;top:0;z-index:5}
+.logo{font-weight:700;font-size:1.3rem;display:flex;align-items:center;gap:8px}.logo i{width:30px;height:30px;border-radius:9px;background:linear-gradient(135deg,var(--pri),var(--tea));display:inline-block}
+nav{display:flex;flex-wrap:wrap;gap:6px}
+nav button,.btn{border:1px solid var(--bd);background:var(--card);padding:0 16px;cursor:pointer;font-weight:700}
+nav button[aria-current=page]{background:var(--pri);color:var(--on);border-color:var(--pri)}
+.btn.p{background:linear-gradient(135deg,var(--pri),#2f6bff);color:var(--on);border-color:transparent}
+:root[data-hc=true] .btn.p{background:var(--pri)}
+main{max-width:1060px;margin:0 auto;padding:24px 20px 90px}
+h1{font-size:clamp(2rem,5vw,3.2rem);line-height:1.1;margin:0 0 12px}h2{margin:0 0 10px;font-size:1.5rem}h3{margin:0 0 6px;font-size:1.1rem}
+.mut{color:var(--mut)}.grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fill,minmax(250px,1fr))}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:20px;padding:18px}
+.two{display:grid;gap:20px;grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+.choice{text-align:left;cursor:pointer;border:2px solid var(--bd);background:var(--card);border-radius:20px;padding:22px;width:100%}
+.choice:hover{border-color:var(--pri)}
+.badge{display:inline-block;font-size:.8rem;font-weight:700;border:1px solid var(--bd);border-radius:99px;padding:2px 10px;color:var(--mut)}
+.sim{border-color:var(--warn);color:var(--warn)}
+.score{font-size:1.6rem;font-weight:700}.bar{height:10px;border-radius:9px;background:var(--bd);overflow:hidden}.bar b{display:block;height:100%;background:linear-gradient(90deg,var(--tea),var(--pri))}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+label.tg{display:flex;gap:10px;align-items:center;padding:8px 0;cursor:pointer;min-height:var(--t)}input[type=checkbox]{width:22px;height:22px;accent-color:var(--pri)}
+.ok{color:var(--ok)}.no{color:var(--bad)}.unk{color:var(--warn)}
+.steps{display:flex;gap:6px;list-style:none;padding:0;margin:0 0 18px;flex-wrap:wrap}.steps li{padding:6px 14px;border-radius:99px;border:1px solid var(--bd)}.steps li[aria-current=step]{background:var(--pri);color:var(--on);border-color:var(--pri);font-weight:700}
+dialog{max-width:620px;width:92%;border:1px solid var(--bd);border-radius:22px;background:var(--card);color:var(--fg);padding:22px}dialog::backdrop{background:#000a}
+.big dd,.bigtxt{font-size:1.6rem}
+.talk{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:6;min-height:56px;padding:0 26px;border-radius:99px;border:0;background:var(--tea);color:var(--on);font-weight:700;font-size:1.05rem;cursor:pointer;box-shadow:0 6px 24px #0005}
+:root[data-hc=true] .talk{background:var(--pri)}
+:root[data-calm=true] .deco{display:none}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+.hero{background:linear-gradient(135deg,#1c1d6b,#3b3bd6 55%,#0f9d9a);color:#fff;border-radius:28px;padding:clamp(22px,5vw,48px);margin-bottom:22px}
+:root[data-hc=true] .hero{background:#000;border:2px solid #fff}
+.hero .card{color:var(--fg)}
+</style></head><body>
+<a class="skip" href="#app">Skip to content</a>
+<header><div class="logo"><i aria-hidden="true"></i>InclusiCart</div><nav id="nav" aria-label="Main"></nav></header>
+<main id="app" tabindex="-1"></main>
+<button class="talk" id="talk" aria-label="Talk to InclusiCart. Shortcut: V">🎤 Talk</button>
+<div id="live" role="status" aria-live="polite" style="position:absolute;left:-999px"></div>
+<dialog id="dlg" aria-labelledby="dt"></dialog>
+<script>
+const $=s=>document.querySelector(s),esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const load=(k,d)=>{try{return JSON.parse(localStorage.getItem(k))||d}catch{return d}},save=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch{}};
+const ATTR={open:'Easy to open',grip:'Needs little grip strength',print:'Large-print label',tactile:'Tactile markings',audio:'Audio or voice guide',alert:'Visual or vibration alerts',simple:'Simple setup'};
+const NEEDS={visual:['Visual','print','tactile','audio'],hearing:['Hearing','alert'],mobility:['Mobility','open','grip','simple'],cognitive:['Cognitive','simple','print']};
+const W={open:3,grip:3,print:3,tactile:3,audio:2,alert:3,simple:2};
+const P=[
+{id:1,n:'Flip-lid water bottle',c:'Kitchen',p:549,e:'🧴',a:{open:1,grip:1,print:0,tactile:0,simple:1},d:'One-hand flip lid. Wide mouth.',l:'750 ml. Wash by hand.'},
+{id:2,n:'Screw-cap water bottle',c:'Kitchen',p:399,e:'🍶',a:{open:0,grip:0,print:1},d:'Classic screw cap.',l:'1 litre. Twist cap to open.'},
+{id:3,n:'Talking kitchen scale',c:'Kitchen',p:1799,e:'⚖️',a:{print:1,tactile:1,audio:1,alert:0,simple:1},d:'Speaks the weight aloud.',l:'Max 5 kg. Press the big button to speak.'},
+{id:4,n:'Basic kitchen scale',c:'Kitchen',p:899,e:'⚖️',a:{print:0,tactile:0,audio:0,simple:1},d:'Small digital display.',l:'Max 5 kg.'},
+{id:5,n:'Smart kettle',c:'Appliances',p:2499,e:'🫖',a:{open:1,audio:1,alert:1,simple:0},d:'Phone app and voice prompts.',l:'1.7 litre. Requires app setup.'},
+{id:6,n:'Plain kettle',c:'Appliances',p:1299,e:'☕',a:{open:1,grip:0,audio:0,alert:0,simple:1},d:'Single switch.',l:'1.5 litre. Handle is narrow.'},
+{id:7,n:'Ergonomic jar opener',c:'Kitchen',p:449,e:'🥫',a:{open:1,grip:1},d:'Fits most lid sizes.',l:'Place on lid and twist.'},
+{id:8,n:'Vibrating alarm clock',c:'Appliances',p:1499,e:'⏰',a:{alert:1,print:1,tactile:1,audio:0,simple:1},d:'Bed-shaker and bright display.',l:'Slide switch sets the alarm.'}];
+let S={view:'welcome',prefs:load('prefs',{needs:[],text:1,hc:false,calm:false,big:false,voice:false}),cart:load('cart',{}),orders:load('orders',[]),q:'',cat:'all',sort:'fit',step:0,pay:'upi',res:null,text:false,sel:null};
+function fit(p,needs){const keys=[...new Set((needs.length?needs:Object.keys(NEEDS)).flatMap(n=>NEEDS[n].slice(1)))];let g=0,m=0,pos=[],neg=[],unk=[];keys.forEach(k=>{const v=p.a[k];if(v==null)unk.push(k);else{m+=W[k];v?(g+=W[k],pos.push(k)):neg.push(k)}});return{s:m?Math.round(g/m*100):null,pos,neg,unk,n:keys.length}}
+function apply(){const r=document.documentElement,f=S.prefs;r.style.setProperty('--s',f.text);r.style.setProperty('--t',f.big?'64px':'44px');r.dataset.hc=f.hc;r.dataset.calm=f.calm;save('prefs',f)}
+function say(t,spoken){$('#live').textContent='';setTimeout(()=>$('#live').textContent=t,50);if(S.prefs.voice&&'speechSynthesis'in window&&spoken!==false){speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang='en-IN';speechSynthesis.speak(u)}}
+const cartItems=()=>Object.entries(S.cart).map(([id,q])=>({...P.find(x=>x.id==id),q})),total=()=>cartItems().reduce((a,i)=>a+i.p*i.q,0);
+const go=v=>{S.view=v;if(v=='pay'){S.step=0;S.res=null}render();$('#app').focus();say(({shop:'Shop',cart:'Cart',passport:'Accessibility Passport',pay:'BlindPay checkout',orders:'Orders'})[v]||'InclusiCart')};
+function nav(){const n=cartItems().reduce((a,i)=>a+i.q,0),t=[['shop','Shop'],['passport','Passport'],['cart','Cart ('+n+')'],['orders','Orders']];$('#nav').innerHTML=S.view=='welcome'?'':t.map(([v,l])=>`<button data-go="${v}" ${S.view==v?'aria-current="page"':''}>${l}</button>`).join('')}
+function card(p){const f=fit(p,S.prefs.needs);return`<article class="card"><div class="deco" style="font-size:2.4rem" aria-hidden="true">${p.e}</div><h3>${p.n}</h3><p class="mut">${S.prefs.calm?p.d.split('.')[0]+'.':p.d}</p><div class="row"><b>₹${p.p}</b><span class="badge">${p.c}</span></div><p class="score" style="margin:8px 0 2px">${f.s==null?'<span class="unk" style="font-size:1rem">Information not verified</span>':f.s+'% match'}</p>${f.s!=null?`<div class="bar" role="img" aria-label="${f.s} percent match"><b style="width:${f.s}%"></b></div>`:''}<div class="row" style="margin-top:12px"><button class="btn" data-open="${p.id}">Details</button><button class="btn p" data-add="${p.id}" aria-label="Add ${p.n} to cart">Add</button></div></article>`}
+function shop(){let l=P.filter(p=>(S.cat=='all'||p.c==S.cat)&&p.n.toLowerCase().includes(S.q.toLowerCase()));l.sort((a,b)=>S.sort=='fit'?(fit(b,S.prefs.needs).s??-1)-(fit(a,S.prefs.needs).s??-1):S.sort=='lo'?a.p-b.p:b.p-a.p);const nd=S.prefs.needs.map(n=>NEEDS[n][0]).join(', ');
+return`<h1>Shop</h1><p class="mut">Matching for: <b>${nd||'no accessibility needs selected'}</b>. <a href="#" data-go="passport">Change in Passport</a></p><div class="row" style="margin:14px 0"><input id="q" type="search" aria-label="Search products" placeholder="Search products" value="${esc(S.q)}" style="flex:1;min-width:200px;padding:0 14px;border:1px solid var(--bd);background:var(--card)"><select id="cat" aria-label="Category" style="padding:0 10px;background:var(--card);border:1px solid var(--bd)">${['all','Kitchen','Appliances'].map(c=>`<option ${S.cat==c?'selected':''}>${c}</option>`).join('')}</select><select id="sort" aria-label="Sort by" style="padding:0 10px;background:var(--card);border:1px solid var(--bd)"><option value="fit" ${S.sort=='fit'?'selected':''}>Best match</option><option value="lo" ${S.sort=='lo'?'selected':''}>Price: low to high</option><option value="hi" ${S.sort=='hi'?'selected':''}>Price: high to low</option></select></div><p class="mut">Sample products and sample accessibility data. <span class="badge sim">Simulated</span></p><div class="grid" id="grid">${gridHtml(l)}</div>`}
+const gridHtml=l=>l.length?l.map(card).join(''):'<div class="card">No products match. Clear the search or choose “all”.</div>';
+function welcome(){return`<section class="hero"><h1>Shopping without barriers.</h1><p style="font-size:1.2rem;max-width:560px">One platform. Every ability. Choose how you want to shop. You never have to share a diagnosis.</p></section><div class="two"><button class="choice" data-mode="normal"><h2>Normal shopping</h2><p class="mut">Browse the store with standard settings. You can turn on accessibility any time.</p></button><button class="choice" data-mode="acc"><h2>Accessible shopping</h2><p class="mut">Pick the settings you want. Mix as many as you like. Your cart stays safe if you switch.</p></button></div>`}
+function passport(){const f=S.prefs;return`<h1>Accessibility Passport</h1><p class="mut">Changes apply instantly across the whole app and are saved on this device.</p><div class="two"><div class="card"><h2>What helps you shop?</h2>${Object.entries(NEEDS).map(([k,v])=>`<label class="tg"><input type="checkbox" data-need="${k}" ${f.needs.includes(k)?'checked':''}>${v[0]} support</label>`).join('')}<h2 style="margin-top:14px">Display</h2><label class="tg"><input type="checkbox" data-pf="hc" ${f.hc?'checked':''}>High contrast</label><label class="tg"><input type="checkbox" data-pf="calm" ${f.calm?'checked':''}>Easy mode: fewer visuals, shorter text</label><label class="tg"><input type="checkbox" data-pf="big" ${f.big?'checked':''}>Large touch targets</label><label class="tg"><input type="checkbox" data-pf="voice" ${f.voice?'checked':''}>Read updates aloud (turn off if you use a screen reader)</label><label for="ts" class="tg">Text size</label><select id="ts" style="padding:0 10px;background:var(--card);border:1px solid var(--bd)">${[[1,'Normal'],[1.25,'Large'],[1.5,'Extra large']].map(([v,l])=>`<option value="${v}" ${f.text==v?'selected':''}>${l}</option>`).join('')}</select></div><div class="card"><h2>Live preview</h2><div class="deco" style="font-size:2.4rem" aria-hidden="true">🧴</div><h3>Flip-lid water bottle</h3><p class="mut">One-hand flip lid. Wide mouth.</p><p class="score">${fit(P[0],f.needs).s??'–'}% match</p><button class="btn p">Add to cart</button><p class="mut" style="margin-top:12px">Eye control, facial gestures and sign-language translation need compatible hardware or a validated service. <span class="badge sim">Not active in this demo</span></p></div></div><p style="margin-top:18px"><button class="btn p" data-go="shop">Start shopping</button></p>`}
+function cart(){const it=cartItems();if(!it.length)return'<h1>Cart</h1><div class="card">Your cart is empty. <a href="#" data-go="shop">Find a product</a>.</div>';
+return`<h1>Cart</h1>${it.map(i=>`<div class="card row" style="margin-bottom:12px;justify-content:space-between"><div><h3>${i.n}</h3><span class="mut">₹${i.p} each</span></div><div class="row"><button class="btn" data-q="${i.id}:-1" aria-label="Fewer ${i.n}">−</button><b aria-live="polite">${i.q}</b><button class="btn" data-q="${i.id}:1" aria-label="More ${i.n}">+</button><button class="btn" data-q="${i.id}:-99">Remove</button></div></div>`).join('')}<p class="score">Total ₹${total()}</p><button class="btn p" data-go="pay">Continue to BlindPay</button>`}
+const sumText=()=>`You are buying ${cartItems().map(i=>i.q+' '+i.n).join(', ')}. Total ${total()} rupees. Delivery in 3 to 5 days. Returns accepted within 7 days.`;
+function pay(){const it=cartItems();if(!it.length&&S.res==null)return'<h1>Checkout</h1><div class="card">Nothing to pay for yet. <a href="#" data-go="shop">Go to the shop</a>.</div>';
+const st=['Review','Payment','Confirm','Result'];let b='';
+if(S.step==0)b=`<h2>Review your order</h2><div class="card"><ul>${it.map(i=>`<li>${i.q} × ${i.n}: ₹${i.p*i.q}</li>`).join('')}</ul><p><b>Total ₹${total()}</b><br>Delivery: 3 to 5 days to your saved address<br>Returns: 7 days</p><div class="row"><button class="btn" data-say="1">🔊 Read summary aloud</button><button class="btn" data-go="cart">Edit cart</button><button class="btn p" data-step="1">Continue</button></div></div>`;
+if(S.step==1)b=`<h2>Choose how to pay</h2><div class="card"><label class="tg"><input type="radio" name="pm" value="upi" ${S.pay=='upi'?'checked':''}>UPI (approve in your UPI app)</label><label class="tg"><input type="radio" name="pm" value="cod" ${S.pay=='cod'?'checked':''}>Cash on delivery</label><p class="mut">InclusiCart never asks for, reads aloud or stores your UPI PIN or OTP. You approve inside your UPI app. <span class="badge sim">Handoff simulated</span></p><div class="row"><button class="btn" data-step="0">Back</button><button class="btn p" data-step="2">Continue</button></div></div>`;
+if(S.step==2)b=`<h2>Confirm your order</h2><div class="card"><p class="bigtxt" style="margin-top:0">${esc(sumText())} Payment: ${S.pay=='upi'?'UPI':'cash on delivery'}.</p><label class="tg"><input type="checkbox" id="sms" checked>Text me instead of calling at delivery</label><div class="row"><button class="btn" data-say="1">🔊 Read aloud</button><button class="btn" data-step="1">Back</button>${S.pay=='upi'?`<button class="btn p" data-upi="1">Place order and open UPI app</button>`:`<button class="btn p" data-done="success">Place order</button>`}</div><p class="mut">Nothing is ordered until you press the button.</p></div>`;
+if(S.step==3){const r=S.res;b=r=='ask'?`<h2>Waiting for your UPI app</h2><div class="card"><p>Approve the payment in your UPI app. <span class="badge sim">Simulated: choose an outcome</span></p><div class="row"><button class="btn" data-done="success">Approved</button><button class="btn" data-done="pending">Still pending</button><button class="btn" data-done="failed">Declined</button></div></div>`:r=='success'?`<h2 class="ok">Payment complete. Order placed.</h2><div class="card"><p>We will text you with updates. Track it in Orders.</p><button class="btn p" data-go="orders">View orders</button></div>`:r=='pending'?`<h2 class="unk">Payment pending</h2><div class="card"><p>Nothing has been ordered yet. Check your UPI app, or try again.</p><div class="row"><button class="btn" data-step="1">Change method</button><button class="btn p" data-done="success">Check again (demo: succeeds)</button></div></div>`:`<h2 class="no">Payment declined</h2><div class="card"><p>You were not charged. Try UPI again or choose cash on delivery.</p><div class="row"><button class="btn p" data-step="1">Try another way</button><button class="btn" data-go="orders">Refund help</button></div></div>`}
+return`<h1>BlindPay</h1><ol class="steps" aria-label="Checkout steps">${st.map((s,i)=>`<li ${i==S.step?'aria-current="step"':''}>${i+1}. ${s}</li>`).join('')}</ol>${b}`}
+function orders(){if(!S.orders.length)return'<h1>Orders</h1><div class="card">No orders yet. Placed orders show up here with live tracking.</div>';const T=['Order placed','Packed','Out for delivery','Delivered'];
+return`<h1>Orders</h1>${S.orders.map(o=>`<div class="card" style="margin-bottom:14px"><h3>${o.id}: ₹${o.t} (${o.pm})</h3><p class="mut">${esc(o.items)}</p><ol>${T.map((t,i)=>`<li ${i<=o.s?'':'class="mut"'}>${i<=o.s?'✓ ':''}${t}</li>`).join('')}</ol></div>`).join('')}`}
+function render(){nav();const v={welcome,passport,shop,cart,pay,orders}[S.view];$('#app').innerHTML=v()}
+function openP(id){const p=P.find(x=>x.id==id),f=fit(p,S.prefs.needs),alt=P.filter(x=>x.id!=id&&x.c==p.c&&(fit(x,S.prefs.needs).s??-1)>(f.s??-1));
+$('#dlg').innerHTML=`<h2 id="dt">${p.n}</h2><p>₹${p.p} · ${f.s==null?'<span class="unk">Information not verified</span>':'<b>'+f.s+'% match</b>'}</p><h3>Why this score</h3><ul style="list-style:none;padding:0">${Object.keys(ATTR).map(k=>{const v=p.a[k];return`<li>${v==null?'<span class="unk">? Information not verified</span>':v?'<span class="ok">✓ Yes</span>':'<span class="no">✕ No</span>'} · ${ATTR[k]}</li>`}).join('')}</ul><p class="mut">Evidence: ${f.n-f.unk.length} of ${f.n} checks verified. Source: sample demo data. <span class="badge sim">Simulated</span></p><h3>Try before you buy: Accessibility Preview</h3><p class="${S.text?'bigtxt':''}">${p.l}</p><div class="row"><button class="btn" data-read="${p.id}">🔊 Read label aloud</button><button class="btn" data-big="1" aria-pressed="${S.text}">Enlarge instructions</button></div>${alt.length?`<h3 style="margin-top:14px">Better matches</h3>${alt.map(a=>`<p>${a.n}: ${fit(a,S.prefs.needs).s}% match <button class="btn" data-open="${a.id}">View</button></p>`).join('')}`:'<p class="mut">No better-matching alternative in this category.</p>'}<div class="row" style="margin-top:16px"><button class="btn p" data-add="${p.id}">Add to cart</button><button class="btn" data-close="1">Close</button></div>`;$('#dlg').showModal()}
+document.addEventListener('click',e=>{const t=e.target.closest('button,a');if(!t)return;const d=t.dataset;if(t.tagName=='A')e.preventDefault();
+if(d.mode){S.view=d.mode=='acc'?'passport':'shop';render();$('#app').focus();say(d.mode=='acc'?'Choose your settings':'Shop')}
+else if(d.go){$('#dlg').open&&$('#dlg').close();go(d.go)}
+else if(d.open){$('#dlg').open&&$('#dlg').close();openP(d.open)}
+else if(d.add){S.cart[d.add]=(S.cart[d.add]||0)+1;save('cart',S.cart);nav();say(P.find(p=>p.id==d.add).n+' added to cart',true)}
+else if(d.q){const[i,n]=d.q.split(':');S.cart[i]=(S.cart[i]||0)+ +n;if(S.cart[i]<=0)delete S.cart[i];save('cart',S.cart);render()}
+else if(d.close)$('#dlg').close();
+else if(d.big){S.text=!S.text;openP(document.querySelector('#dt').textContent&&P.find(p=>p.n==$('#dt').textContent).id)}
+else if(d.read){const p=P.find(x=>x.id==d.read);say(p.n+'. '+p.l,true);if(!S.prefs.voice&&'speechSynthesis'in window){speechSynthesis.cancel();speechSynthesis.speak(new SpeechSynthesisUtterance(p.n+'. '+p.l))}}
+else if(d.say){say(sumText());if(!S.prefs.voice&&'speechSynthesis'in window){speechSynthesis.cancel();speechSynthesis.speak(new SpeechSynthesisUtterance(sumText()))}}
+else if(d.step){S.step=+d.step;render();say('Step '+(S.step+1)+' of 4')}
+else if(d.upi){S.step=3;S.res='ask';render();say('Waiting for your UPI app')}
+else if(d.done){if(d.done=='success'){S.orders.unshift({id:'IC'+Math.floor(1000+Math.random()*9000),t:total(),pm:S.pay.toUpperCase(),items:cartItems().map(i=>i.q+' × '+i.n).join(', '),s:0});save('orders',S.orders);S.cart={};save('cart',S.cart)}S.step=3;S.res=d.done;render();say({success:'Payment complete. Order placed.',pending:'Payment pending. Nothing ordered yet.',failed:'Payment declined. You were not charged.'}[d.done])}
+});
+document.addEventListener('change',e=>{const t=e.target;if(t.dataset.need){const n=S.prefs.needs,k=t.dataset.need;S.prefs.needs=t.checked?[...n,k]:n.filter(x=>x!=k);apply();render()}
+else if(t.dataset.pf){S.prefs[t.dataset.pf]=t.checked;apply();render()}else if(t.id=='ts'){S.prefs.text=+t.value;apply();render()}
+else if(t.name=='pm')S.pay=t.value;else if(t.id=='cat'||t.id=='sort'){S[t.id]=t.value;render()}});
+document.addEventListener('input',e=>{if(e.target.id=='q'){S.q=e.target.value;$('#grid').innerHTML=gridHtml(P.filter(p=>(S.cat=='all'||p.c==S.cat)&&p.n.toLowerCase().includes(S.q.toLowerCase())))}});
+function listen(){const SR=window.SpeechRecognition||window.webkitSpeechRecognition;if(!SR){say('Voice is not supported in this browser. Please use the buttons.');return}
+const r=new SR();r.lang='en-IN';$('#talk').textContent='🎙️ Listening…';r.onend=()=>$('#talk').textContent='🎤 Talk';r.onerror=()=>say('I did not catch that. Please try again or use the buttons.');
+r.onresult=ev=>{const t=ev.results[0][0].transcript.toLowerCase();const m=t.match(/(?:search|find|show)(?: for)? (.+)/);
+if(m){S.q=m[1];go('shop');say('Showing results for '+m[1])}else if(/cart/.test(t))go('cart');else if(/checkout|pay/.test(t))go('pay');else if(/passport|settings/.test(t))go('passport');else if(/order/.test(t))go('orders');else if(/shop|home/.test(t))go('shop');else say('I heard '+t+'. Try: search kettle, cart, checkout, passport.')};r.start()}
+$('#talk').onclick=listen;document.addEventListener('keydown',e=>{if(e.key.toLowerCase()=='v'&&!/INPUT|TEXTAREA|SELECT/.test(e.target.tagName)&&!e.ctrlKey&&!e.metaKey)listen()});
+apply();render();
+</script></body></html>
