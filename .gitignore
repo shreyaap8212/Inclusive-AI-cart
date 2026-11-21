@@ -1,0 +1,29 @@
+# dependencies
+node_modules
+
+# build output
+dist
+dist-ssr
+
+# logs
+*.log
+npm-debug.log*
+
+# local environment files (API keys go here, never commit them)
+.env
+.env.*
+!.env.example
+
+# editor and OS files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.sw?
+
+# Vercel
+.vercel
+
+# error files you created while debugging
+build-error.txt

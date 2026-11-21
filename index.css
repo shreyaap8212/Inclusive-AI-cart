@@ -1,0 +1,33 @@
+@import "tailwindcss";
+@import url("https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&display=swap");
+
+:root{
+  --bg:#f6f7fb; --card:#fff; --fg:#14163a; --mut:#555a80; --bd:#d9dcef;
+  --pri:#3b3bd6; --on:#fff; --tea:#0a7f7c; --ok:#0b7a4b; --bad:#b42318; --warn:#8a5a00;
+  --s:1; --t:44px;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){--bg:#0d0f24;--card:#171a3a;--fg:#eef0ff;--mut:#aaaed8;--bd:#2c3068;--pri:#9094ff;--on:#0d0f24;--tea:#3dd6d0;--ok:#4ade80;--bad:#ff8a80;--warn:#ffc857}
+}
+:root[data-hc="true"]{--bg:#000;--card:#000;--fg:#fff;--mut:#fff;--bd:#fff;--pri:#ffe600;--on:#000;--tea:#00ffd5}
+
+html{font-size:calc(16px * var(--s))}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:"Atkinson Hyperlegible",system-ui,sans-serif}
+button,input,select{min-height:var(--t)}
+:focus-visible{outline:3px solid var(--pri);outline-offset:3px}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:20px;padding:18px}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:var(--t);padding:0 16px;border-radius:12px;border:1px solid var(--bd);background:var(--card);color:var(--fg);font:inherit;font-weight:700;cursor:pointer;text-decoration:none}
+.btn-p{background:var(--pri);color:var(--on);border-color:var(--pri)}
+.field{min-height:var(--t);padding:0 12px;border-radius:12px;border:1px solid var(--bd);background:var(--card);color:var(--fg);font:inherit}
+.grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fill,minmax(250px,1fr))}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.bar{height:10px;border-radius:9px;background:var(--bd);overflow:hidden}
+.bar b{display:block;height:100%;background:var(--pri)}
+.badge{display:inline-block;font-size:.8rem;font-weight:700;border:1px solid var(--bd);border-radius:99px;padding:2px 10px;color:var(--mut)}
+.sim{border-color:var(--warn);color:var(--warn)}
+.ok{color:var(--ok)}.no{color:var(--bad)}.unk{color:var(--warn)}
+.mut{color:var(--mut)}
+dialog{max-width:620px;width:92%;border:1px solid var(--bd);border-radius:22px;background:var(--card);color:var(--fg);padding:22px}
+dialog::backdrop{background:rgba(0,0,0,.6)}
+[data-calm="true"] .deco{display:none}
